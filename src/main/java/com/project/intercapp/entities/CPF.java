@@ -15,6 +15,7 @@ public class CPF {
         return number;
     }
 
+	/* 
     private static boolean isValid(Long number) {
 
 		int firstCheckDigit, secondCheckDigit, sum, remainder, j, k;
@@ -63,5 +64,5 @@ public class CPF {
 
 	    return k == secondCheckDigit;
 	}
-
+	*/
 }

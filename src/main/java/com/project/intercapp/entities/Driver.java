@@ -1,7 +1,11 @@
 package com.project.intercapp.entities;
 
 import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name= "tb_driver")
 public class Driver extends User{
     
     @Embedded
