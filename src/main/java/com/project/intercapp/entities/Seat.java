@@ -22,10 +22,10 @@ public class Seat {
     private int number;
 
     @ManyToOne
-    @JoinColumn(name = "onibus_id")
+    @JoinColumn(name = "bus_id")
     private Bus bus;
 
-    @OneToOne(mappedBy = "assento")
+    @OneToOne(mappedBy = "seat")
     private Reservation reservation;
 
     public Seat() {

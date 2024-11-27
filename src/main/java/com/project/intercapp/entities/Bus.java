@@ -2,12 +2,12 @@ package com.project.intercapp.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,8 +22,7 @@ public class Bus {
     private String plate;
     private Integer capacity;
 
-    @ManyToOne
-    @JoinColumn(name = "onibus_id")
+    @OneToMany(mappedBy = "onibus", cascade = CascadeType.ALL)
     private List<Seat> seats;
 
     public Bus() {
