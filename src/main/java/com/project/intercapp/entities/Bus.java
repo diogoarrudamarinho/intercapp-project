@@ -16,7 +16,7 @@ public class Bus {
     
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private String model;
     private String plate;
@@ -29,7 +29,7 @@ public class Bus {
     }
 
     public Bus(Long Id, Integer capacity, String model, String plate, List<Seat> seats) {
-        this.Id = Id;
+        this.id = Id;
         this.capacity = capacity;
         this.model = model;
         this.plate = plate;
@@ -37,11 +37,11 @@ public class Bus {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long Id) {
-        this.Id = Id;
+        this.id = Id;
     }
 
     public String getModel() {
@@ -80,7 +80,7 @@ public class Bus {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((plate == null) ? 0 : plate.hashCode());
         return result;
     }
@@ -94,10 +94,10 @@ public class Bus {
         if (getClass() != obj.getClass())
             return false;
         Bus other = (Bus) obj;
-        if (Id == null) {
-            if (other.Id != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!Id.equals(other.Id))
+        } else if (!id.equals(other.id))
             return false;
         if (plate == null) {
             if (other.plate != null)
