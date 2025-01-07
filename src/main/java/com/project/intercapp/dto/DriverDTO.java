@@ -18,8 +18,5 @@ public class DriverDTO extends UserDTO{
         return cpf;
     }
 
-    public void setCpf(CPF cpf) {
-        this.cpf = cpf;
-    }
 
 }

@@ -17,8 +17,4 @@ public class StudentDTO extends UserDTO{
         return register;
     }
 
-    public void setRegister(String register) {
-        this.register = register;
-    }
-
 }
