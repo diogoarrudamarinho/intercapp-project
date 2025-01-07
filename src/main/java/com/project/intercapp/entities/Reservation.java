@@ -75,7 +75,7 @@ public class Reservation {
         this.reservationDate = reservationDate;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
