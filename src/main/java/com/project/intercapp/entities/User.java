@@ -18,18 +18,20 @@ public abstract class User {
 
     private String name;
     private String mail;
+    private String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Phone> phones;
 
      public User() {
     }
 
-    public User(Long id, String mail, String name, List<Phone> phones) {
+    public User(Long id, String mail, String name, List<Phone> phones, String password) {
         this.id = id;
         this.mail = mail;
         this.name = name;
         this.phones = phones;
+        this.password = password;
     }
 
     public Long getId() {
@@ -63,6 +65,14 @@ public abstract class User {
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public int hashCode() {
@@ -80,4 +90,5 @@ public abstract class User {
         User other = (User) obj;
         return Objects.equals(id, other.id);
     }
+
 }
