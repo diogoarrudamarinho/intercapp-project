@@ -5,4 +5,5 @@ import com.project.intercapp.entities.Bus;
 
 public interface BusRepository extends JpaRepository<Bus, Long>{
     
+    boolean existsByPlate(String plate);
 }
