@@ -7,7 +7,6 @@ public class PhoneDTO {
     private Long id;
     private Integer ddd;
     private Long number;
-    private Long userId;
 
     public PhoneDTO() {}
 
@@ -15,7 +14,6 @@ public class PhoneDTO {
         this.id = entity.getId();
         this.ddd = entity.getDdd();
         this.number = entity.getNumber();
-        this.userId = entity.getUser().getId();
     }
 
     public Long getId() {
@@ -30,7 +28,4 @@ public class PhoneDTO {
         return number;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
 }
