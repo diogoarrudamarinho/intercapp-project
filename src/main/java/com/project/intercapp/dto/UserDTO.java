@@ -1,6 +1,7 @@
 package com.project.intercapp.dto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.project.intercapp.entities.Phone;
 import com.project.intercapp.entities.User;
@@ -10,7 +11,7 @@ public class UserDTO {
     private Long id;
     private String name;
     private String mail;
-    private List<Phone> phones;
+    private List<Long> phoneIds;
 
     public UserDTO(){}
 
@@ -18,7 +19,9 @@ public class UserDTO {
         this.id = entity.getId();
         this.name = entity.getName();
         this.mail = entity.getMail();
-        this.phones = entity.getPhones();
+        this.phoneIds = entity.getPhones().stream()  
+                              .map(Phone::getId)    
+                              .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -33,8 +36,8 @@ public class UserDTO {
         return mail;
     }
 
-    public List<Phone> getPhones() {
-        return phones;
+    public List<Long> getPhones() {
+        return phoneIds;
     }
 
 }
