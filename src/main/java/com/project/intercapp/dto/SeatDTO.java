@@ -15,7 +15,8 @@ public class SeatDTO {
         this.id = entity.getId();
         this.number = entity.getNumber();
         this.busId = entity.getBus().getId();
-        this.reservationId = entity.getReservation().getId();
+        this.reservationId = entity.getReservation() != null ? 
+                             entity.getReservation().getId() : null;
     }
 
     public Long getId() {
