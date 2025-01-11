@@ -22,7 +22,7 @@ public class Bus {
     private String plate;
     private Integer capacity;
 
-    @OneToMany(mappedBy = "onibus", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL)
     private List<Seat> seats;
 
     public Bus() {
