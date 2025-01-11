@@ -28,12 +28,11 @@ public class Bus {
     public Bus() {
     }
 
-    public Bus(Long Id, Integer capacity, String model, String plate, List<Seat> seats) {
+    public Bus(Long Id, Integer capacity, String model, String plate) {
         this.id = Id;
         this.capacity = capacity;
         this.model = model;
         this.plate = plate;
-        this.seats = seats;
     }
 
     public Long getId() {
