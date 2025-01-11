@@ -31,11 +31,10 @@ public class Seat {
     public Seat() {
     }
 
-    public Seat(Long id, int number, Bus bus, Reservation reservation) {
+    public Seat(Long id, int number, Bus bus) {
         this.id = id;
         this.number = number;
         this.bus = bus;
-        this.reservation = reservation;
     }
 
     public Long getId() {
