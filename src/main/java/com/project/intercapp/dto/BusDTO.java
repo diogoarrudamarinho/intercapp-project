@@ -12,7 +12,7 @@ public class BusDTO {
     private String model;
     private String plate;
     private Integer capacity;
-    private List<Long> seatIds; // IDs dos assentos
+    private List<Long> seatIds;
 
     public BusDTO(){}
 
@@ -22,7 +22,7 @@ public class BusDTO {
         this.plate = entity.getPlate();
         this.capacity = entity.getCapacity();
         this.seatIds = entity.getSeats().stream()
-                             .map(Seat::getId) // Apenas IDs
+                             .map(Seat::getId) 
                              .collect(Collectors.toList());
     }
 
