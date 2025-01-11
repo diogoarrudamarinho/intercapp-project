@@ -34,16 +34,16 @@ public class StudentServiceImp implements StudentService{
     }
 
     @Override
-    public StudentDTO update(Long id, Student student) {
+    public StudentDTO update(Long id, Student newStudent) {
 
-        Student newStudent = studentRepository.findById(id).get();
+        Student student = studentRepository.findById(id).get();
 
-        newStudent.setName(student.getName());
-        newStudent.setMail(student.getMail());
-        newStudent.setPhones(student.getPhones());
-        newStudent.setRegister(student.getRegister());
+        student.setName(newStudent.getName());
+        student.setMail(newStudent.getMail());
+        student.setPhones(newStudent.getPhones());
+        student.setRegister(newStudent.getRegister());
 
-        return new StudentDTO(studentRepository.save(newStudent)); 
+        return new StudentDTO(studentRepository.save(student)); 
     }
 
     @Override
