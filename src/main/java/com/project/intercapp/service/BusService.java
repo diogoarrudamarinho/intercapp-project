@@ -13,8 +13,9 @@ public interface BusService {
     BusDTO findByPlate(String plate);
     BusMinDTO findMinById(Long id);
     BusMinDTO findMinByPlate(String plate);
-    BusDTO update(String plate, Bus bus);
+    BusDTO update(Long id, Bus bus);
     List<BusDTO> findAll();
+    List<BusMinDTO> findAllMin();
     void delete(Long id);
 
 }

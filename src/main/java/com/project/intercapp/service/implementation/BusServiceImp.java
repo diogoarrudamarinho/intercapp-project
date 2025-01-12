@@ -81,9 +81,9 @@ public class BusServiceImp implements BusService {
     
     @Override
     @Transactional
-    public BusDTO update(String plate, Bus newBus){
+    public BusDTO update(Long id, Bus newBus){
 
-        Bus bus = busRepository.findByPlate(plate).get();
+        Bus bus = busRepository.findById(id).get();
 
         bus.setModel(newBus.getModel());
         bus.setPlate(newBus.getPlate());
@@ -106,6 +106,14 @@ public class BusServiceImp implements BusService {
     public List<BusDTO> findAll(){
         return busRepository.findAll()
                             .stream().map(BusDTO::new)
+                            .toList();                                             
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<BusMinDTO> findAllMin(){
+        return busRepository.findAll()
+                            .stream().map(BusMinDTO::new)
                             .toList();                                             
     }
 }

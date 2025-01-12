@@ -51,6 +51,11 @@ public class SeatServiceImp implements SeatService{
     }
 
     @Override
+    public List<Seat> findByBusId(Long busId){
+        return seatRepository.findByBusId(busId);
+    }
+
+    @Override
     @Transactional
     public List<Seat> add(Bus bus, int quantity){
 
