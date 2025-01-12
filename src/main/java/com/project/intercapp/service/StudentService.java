@@ -12,6 +12,6 @@ public interface StudentService {
     Student findEntityById(Long id);
     StudentDTO update(Long id, Student student);
     List<StudentDTO> findAll();
-
+    boolean delete(String register);
 
 }

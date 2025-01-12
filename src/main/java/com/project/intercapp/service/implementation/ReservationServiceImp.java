@@ -1,5 +1,8 @@
 package com.project.intercapp.service.implementation;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,11 +61,18 @@ public class ReservationServiceImp implements ReservationService{
         reservationRepository.save(reservation);
     }
     
+    @Override
+    public boolean hasActiveReservation(Long studentId){
+
+        Optional<List<Reservation>> activeReservations = reservationRepository.findActiveByStudent(studentId, true);
+        return activeReservations.isPresent() && !activeReservations.get().isEmpty();
+    }
+
     private boolean isSeatAvailable(Long seatId) {
-        return reservationRepository.findBySeatIdAndStatus(seatId, true).isEmpty();
+        return reservationRepository.findActiveBySeatId(seatId, true).isEmpty();
     }
 
     private boolean hasActiveReservation(Long studentId, Long busId) {
-        return reservationRepository.findByStudentIdAndBusIdAndStatus(studentId, busId, true).isPresent();
+        return reservationRepository.findActiveByStudentIdAndBusId(studentId, busId, true).isPresent();
     }
 }
