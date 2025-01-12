@@ -14,4 +14,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>{
     Optional<List<Reservation>> findActiveByStudent(Long studentId, boolean status);
 
     Optional<Reservation> findActiveByStudentIdAndBusId(Long studentId, Long busId, boolean status);
+
+    List<Reservation> findAllByStudent(Long studentId);
 }

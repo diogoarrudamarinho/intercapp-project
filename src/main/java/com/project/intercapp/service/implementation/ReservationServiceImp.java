@@ -60,6 +60,15 @@ public class ReservationServiceImp implements ReservationService{
         reservation.setStatus(false);
         reservationRepository.save(reservation);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ReservationDTO> findAllByStudent(Long studentId) {
+        return reservationRepository.findAllByStudent(studentId)
+                                            .stream()
+                                            .map(ReservationDTO::new)
+                                            .toList();
+    }
     
     @Override
     public boolean hasActiveReservation(Long studentId){
