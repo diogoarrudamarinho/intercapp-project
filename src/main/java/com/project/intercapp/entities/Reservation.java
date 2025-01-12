@@ -33,13 +33,13 @@ public class Reservation {
     private boolean status;  
 
     public Reservation() {
+        this.reservationDate = LocalDateTime.now();
     }
 
-    public Reservation(Long id, LocalDateTime reservationDate, Seat seat, boolean status, Student student) {
+    public Reservation(Long id, Seat seat, Student student) {
         this.id = id;
-        this.reservationDate = reservationDate;
+        this.reservationDate = LocalDateTime.now();
         this.seat = seat;
-        this.status = status;
         this.student = student;
     }
 
