@@ -4,15 +4,19 @@ import java.util.List;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.intercapp.dto.BusDTO;
 import com.project.intercapp.dto.BusMinDTO;
-import com.project.intercapp.entities.Seat;
 import com.project.intercapp.entities.Bus;
+import com.project.intercapp.entities.Seat;
 import com.project.intercapp.repositories.BusRepository;
 import com.project.intercapp.service.BusService;
 import com.project.intercapp.service.SeatService;
 
+
+@Service
 public class BusServiceImp implements BusService {
     
     @Autowired
@@ -22,6 +26,7 @@ public class BusServiceImp implements BusService {
     private SeatService seatService;
     
     @Override
+    @Transactional
     public BusDTO create(Bus newBus){
         if (newBus.getPlate() != null && busRepository.existsByPlate(newBus.getPlate()))
             throw new IllegalArgumentException("Bus already exists");
@@ -32,6 +37,17 @@ public class BusServiceImp implements BusService {
         bus.setSeats(seats);
 
         return new BusDTO(bus);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        Bus bus = busRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Bus not found", id));
+
+        seatService.removeAll(bus.getId());
+
+        busRepository.delete(bus);
     }
 
     @Override
@@ -62,8 +78,9 @@ public class BusServiceImp implements BusService {
                             .orElseThrow(() -> new ObjectNotFoundException(
                                                 "Object not Found", id)));
     }
-
+    
     @Override
+    @Transactional
     public BusDTO update(String plate, Bus newBus){
 
         Bus bus = busRepository.findByPlate(plate).get();
@@ -85,6 +102,7 @@ public class BusServiceImp implements BusService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<BusDTO> findAll(){
         return busRepository.findAll()
                             .stream().map(BusDTO::new)

@@ -19,6 +19,13 @@ public class StudentServiceImp implements StudentService{
     private StudentRepository studentRepository;
 
     @Override
+    public Student findEntityById(Long studentId) {
+        return studentRepository.findById(studentId)
+                .orElseThrow(() -> new ObjectNotFoundException("Student not found", studentId));
+    }
+
+    @Override
+    @Transactional
     public StudentDTO create(Student newStudent) {
         if (newStudent.getId() != null && studentRepository.existsById(newStudent.getId()))
             throw new IllegalArgumentException("User ID already exists");
@@ -34,6 +41,7 @@ public class StudentServiceImp implements StudentService{
     }
 
     @Override
+    @Transactional
     public StudentDTO update(Long id, Student newStudent) {
 
         Student student = studentRepository.findById(id).get();
