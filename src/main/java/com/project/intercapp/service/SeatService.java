@@ -8,7 +8,9 @@ import com.project.intercapp.entities.Bus;
 public interface SeatService {
     
     List<Seat> create(Bus bus);
+    Seat findById(Long id);
     List<Seat> add(Bus bus, int quantity);
     List<Seat> remove(Bus bus, int quantity);
+    void removeAll(Long busId);
 
 }

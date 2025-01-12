@@ -9,6 +9,7 @@ public interface StudentService {
     
     StudentDTO create(Student newStudent);
     StudentDTO findById(Long id);
+    Student findEntityById(Long id);
     StudentDTO update(Long id, Student student);
     List<StudentDTO> findAll();
 
