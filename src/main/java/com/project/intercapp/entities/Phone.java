@@ -1,7 +1,5 @@
 package com.project.intercapp.entities;
 
-import java.util.Objects;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,16 +21,16 @@ public class Phone {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Student student;
 
     public Phone(){
     }
 
-    public Phone(Long id, Integer ddd, Long number, User user) {
+    public Phone(Long id, Integer ddd, Long number, Student student) {
         this.id = id;
         this.ddd = ddd;
         this.number = number;
-        this.user = user;
+        this.student = student;
     }
 
     public Long getId() {
@@ -59,42 +57,48 @@ public class Phone {
         this.number = number;
     }
 
-    public User getUser() {
-        return user;
+    public Student getUser() {
+        return student;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Student student) {
+        this.student = student;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(ddd, number, user);
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ddd == null) ? 0 : ddd.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Phone other = (Phone) obj;
-        if (!Objects.equals(this.ddd, other.ddd)) {
-            return false;
-        }
-        if (!Objects.equals(this.number, other.number)) {
-            return false;
-        }
-        return Objects.equals(this.user, other.user);
-    }
-
-    public static boolean isValid(Integer ddd, Long number){
-        return  (ddd > 11 && ddd < 99) &&
-                (number > 20000000 && number < 999999999);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Phone other = (Phone) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (ddd == null) {
+			if (other.ddd != null)
+				return false;
+		} else if (!ddd.equals(other.ddd))
+			return false;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;
+		return true;
+	}
 }
