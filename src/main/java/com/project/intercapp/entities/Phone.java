@@ -22,17 +22,17 @@ public class Phone {
     private Long number;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
 
     public Phone(){
     }
 
-    public Phone(Long id, Integer ddd, Long number, User user) {
+    public Phone(Long id, Integer ddd, Long number, Student student) {
         this.id = id;
         this.ddd = ddd;
         this.number = number;
-        this.user = user;
+        this.student = student;
     }
 
     public Long getId() {
@@ -59,17 +59,17 @@ public class Phone {
         this.number = number;
     }
 
-    public User getUser() {
-        return user;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ddd, number, user);
+        return Objects.hash(ddd, number, student);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Phone {
         if (!Objects.equals(this.number, other.number)) {
             return false;
         }
-        return Objects.equals(this.user, other.user);
+        return Objects.equals(this.student, other.student);
     }
 
     public static boolean isValid(Integer ddd, Long number){

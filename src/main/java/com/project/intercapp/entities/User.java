@@ -1,16 +1,11 @@
 package com.project.intercapp.entities;
 
-import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToMany;
 
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User {
     
     @Id
@@ -20,17 +15,13 @@ public abstract class User {
     private String mail;
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<Phone> phones;
-
      public User() {
     }
 
-    public User(Long id, String mail, String name, List<Phone> phones, String password) {
+    public User(Long id, String mail, String name, String password) {
         this.id = id;
         this.mail = mail;
         this.name = name;
-        this.phones = phones;
         this.password = password;
     }
 
@@ -58,14 +49,6 @@ public abstract class User {
         this.mail = mail;
     }
 
-    public List<Phone> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
-    }
-    
     public String getPassword() {
         return password;
     }

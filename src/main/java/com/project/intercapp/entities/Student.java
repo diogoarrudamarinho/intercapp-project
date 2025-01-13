@@ -1,12 +1,18 @@
 package com.project.intercapp.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_student")
 public class Student extends User{
    
+    @OneToMany(mappedBy = "student")
+    private List<Phone> phones;
+
     private String register;
 
     public Student(){
@@ -23,6 +29,14 @@ public class Student extends User{
 
     public void setRegister(String register) {
         this.register = register;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
     }
 
     @Override
