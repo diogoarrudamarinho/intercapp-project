@@ -113,5 +113,4 @@ public class Reservation {
         return Objects.equals(this.seat, other.seat);
     }
 
-
 }

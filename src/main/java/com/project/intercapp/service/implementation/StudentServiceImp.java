@@ -11,16 +11,12 @@ import com.project.intercapp.dto.StudentDTO;
 import com.project.intercapp.entities.Student;
 import com.project.intercapp.repositories.StudentRepository;
 import com.project.intercapp.service.StudentService;
-import com.project.intercapp.service.ReservationService;
 
 @Service
 public class StudentServiceImp implements StudentService{
 
     @Autowired
     private StudentRepository studentRepository;
-
-    @Autowired
-    private ReservationService reservationService;
 
     @Override
     public Student findEntityById(Long studentId) {
@@ -44,9 +40,6 @@ public class StudentServiceImp implements StudentService{
         Student student = studentRepository.findByRegister(register)
         .orElseThrow(() -> new IllegalArgumentException(
                                "Object " + register + " not Found"));
-    
-        if (reservationService.hasActiveReservation(student.getId())) 
-            throw new IllegalArgumentException("Student has active reservations, cannot delete.");
 
         studentRepository.delete(student);
         return true;

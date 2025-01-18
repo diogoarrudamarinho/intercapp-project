@@ -1,7 +1,6 @@
 package com.project.intercapp.service.implementation;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,8 @@ public class ReservationServiceImp implements ReservationService{
 
         Seat seat = seatService.findById(seatId);
 
+
+
         if (!isSeatAvailable(seatId)) {
             throw new IllegalArgumentException("Seat is already reserved");
         }
@@ -64,24 +65,17 @@ public class ReservationServiceImp implements ReservationService{
     @Override
     @Transactional(readOnly = true)
     public List<ReservationDTO> findAllByStudent(Long studentId) {
-        return reservationRepository.findAllByStudent(studentId)
+        return reservationRepository.findAllByStudentId(studentId)
                                             .stream()
                                             .map(ReservationDTO::new)
                                             .toList();
     }
-    
-    @Override
-    public boolean hasActiveReservation(Long studentId){
-
-        Optional<List<Reservation>> activeReservations = reservationRepository.findActiveByStudent(studentId, true);
-        return activeReservations.isPresent() && !activeReservations.get().isEmpty();
-    }
 
     private boolean isSeatAvailable(Long seatId) {
-        return reservationRepository.findActiveBySeatId(seatId, true).isEmpty();
+        return reservationRepository.findBySeatIdAndStatus(seatId, true).isEmpty();
     }
 
     private boolean hasActiveReservation(Long studentId, Long busId) {
-        return reservationRepository.findActiveByStudentIdAndBusId(studentId, busId, true).isPresent();
+        return reservationRepository.findByStudentIdAndBusIdAndStatus(studentId, busId, true).isPresent();
     }
 }
