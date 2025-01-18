@@ -25,6 +25,9 @@ public class Bus {
     @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL)
     private List<Seat> seats;
 
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL)
+    private List<Schedule> schedules;
+
     public Bus() {
     }
 
@@ -73,6 +76,14 @@ public class Bus {
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+    
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     @Override

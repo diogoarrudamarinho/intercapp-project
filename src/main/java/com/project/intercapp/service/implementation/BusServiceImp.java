@@ -1,6 +1,7 @@
 package com.project.intercapp.service.implementation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +107,7 @@ public class BusServiceImp implements BusService {
     public List<BusDTO> findAll(){
         return busRepository.findAll()
                             .stream().map(BusDTO::new)
-                            .toList();                                             
+                            .collect(Collectors.toList());                                             
     }
 
     @Override
@@ -114,6 +115,6 @@ public class BusServiceImp implements BusService {
     public List<BusMinDTO> findAllMin(){
         return busRepository.findAll()
                             .stream().map(BusMinDTO::new)
-                            .toList();                                             
+                            .collect(Collectors.toList());                                             
     }
 }
