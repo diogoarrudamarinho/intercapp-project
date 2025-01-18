@@ -1,35 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ScheduleList from './ScheduleList';
+import ScheduleEdit from './ScheduleEdit';
 
 class App extends Component {
-  state = {
-    students: []
-  };
-
-  async componentDidMount() {
-    const response = await fetch('/students');
-    const body = await response.json();
-    this.setState({students: body});
-  }
-
   render() {
-    const {students} = this.state;
     return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <div className="App-intro">
-              <h2>Estudantes</h2>
-              {students.map(student =>
-                  <div key={student.id}>
-                    {student.name} ({student.mail})
-                  </div>
-              )}
-            </div>
-          </header>
-        </div>
+      <Router>
+        <Switch>
+          <Route path='/' exact={true} component={ScheduleList}/>
+          <Route path='/schedules' exact={true} component={ScheduleList}/>
+          <Route path='/schedules/:id' component={ScheduleEdit}/>
+        </Switch>
+      </Router>
     );
   }
 }
+
 export default App;
