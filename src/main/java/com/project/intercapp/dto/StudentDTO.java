@@ -4,10 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.project.intercapp.entities.Phone;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.project.intercapp.entities.Phone;
 import com.project.intercapp.entities.Student;
 
 public class StudentDTO{
@@ -29,7 +25,7 @@ public class StudentDTO{
         this.register = entity.getRegister();
         this.phonesIds = entity.getPhones().stream()  
                               .map(Phone::getId)    
-                              .collect(Collectors.toList());;
+                              .collect(Collectors.toList());
         
     }
 
