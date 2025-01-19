@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ScheduleList from './ScheduleList';
 import ScheduleEdit from './ScheduleEdit';
+import Home from './Home';
+import AppNavbar from './AppNavbar';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route path='/' exact={true} component={ScheduleList}/>
-          <Route path='/schedules' exact={true} component={ScheduleList}/>
-          <Route path='/schedules/:id' component={ScheduleEdit}/>
-        </Switch>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/schedules' element={<ScheduleList />} />
+          <Route path='/schedules/:id' element={<ScheduleEdit />} />
+        </Routes>
       </Router>
     );
   }

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import AppNavbar from './AppNavbar';
 
 class ScheduleList extends Component {
-
     constructor(props) {
         super(props);
         this.state = {schedules: [], isLoading: true};
@@ -13,8 +12,12 @@ class ScheduleList extends Component {
 
     async componentDidMount() {
         const response = await fetch('/schedules');
-        const body = await response.json();
-        this.setState({schedules: body, isLoading: false});
+        if (response.ok) {
+            const body = await response.json();
+            this.setState({schedules: body, isLoading: false});
+        } else {
+            console.error('Failed to fetch schedules:', response.statusText);
+        }
     }
 
     async remove(id) {
