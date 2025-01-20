@@ -66,6 +66,13 @@ public class BusServiceImp implements BusService {
     }
 
     @Override
+    public Bus findEntityById(Long id) {
+        return busRepository.findById(id)
+                          .orElseThrow(() -> new ObjectNotFoundException(
+                                                 "Object not Found", id));
+    }
+
+    @Override
     public BusDTO findByPlate(String plate) {
         return new BusDTO(busRepository.findByPlate(plate)
                           .orElseThrow(() -> new IllegalArgumentException(

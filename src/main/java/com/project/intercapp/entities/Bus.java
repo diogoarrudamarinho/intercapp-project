@@ -26,6 +26,9 @@ public class Bus {
     @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Seat> seats;
 
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Schedule> schedules;
+
     public Bus() {
     }
 
@@ -105,6 +108,14 @@ public class Bus {
         } else if (!plate.equals(other.plate))
             return false;
         return true;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
 }

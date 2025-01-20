@@ -11,6 +11,7 @@ public interface BusService {
     
     BusDTO create(Bus newBus);
     BusDTO findById(Long id);
+    Bus findEntityById(Long id);
     BusSeatDTO findSeatsById(Long id);
     BusDTO findByPlate(String plate);
     BusMinDTO findMinById(Long id);
