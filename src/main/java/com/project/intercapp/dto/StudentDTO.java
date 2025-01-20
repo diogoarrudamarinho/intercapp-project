@@ -6,19 +6,41 @@ import java.util.stream.Collectors;
 import com.project.intercapp.entities.Phone;
 import com.project.intercapp.entities.Student;
 
-public class StudentDTO extends UserDTO{
+public class StudentDTO{
     
+    private Long id;
+    private String name;
+    private String mail;
     private List<Long> phoneIds;
     private String register;
 
     public StudentDTO(){}
 
     public StudentDTO(Student entity){
-        super(entity);
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.mail = entity.getMail();
         this.register = entity.getRegister();
-        this.phoneIds = entity.getPhones().stream()  
-                              .map(Phone::getId)    
-                              .collect(Collectors.toList());
+        if (entity.getPhones() != null)
+            this.phoneIds = entity.getPhones().stream()
+                                  .map(Phone::getId)
+                                  .collect(Collectors.toList());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public List<Long> getPhoneIds() {
+        return phoneIds;
     }
 
     public String getRegister() {

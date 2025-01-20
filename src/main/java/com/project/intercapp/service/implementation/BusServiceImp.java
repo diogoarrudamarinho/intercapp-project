@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.intercapp.dto.BusDTO;
 import com.project.intercapp.dto.BusMinDTO;
+import com.project.intercapp.dto.BusSeatDTO;
 import com.project.intercapp.entities.Bus;
 import com.project.intercapp.entities.Seat;
 import com.project.intercapp.repositories.BusRepository;
@@ -53,6 +54,13 @@ public class BusServiceImp implements BusService {
     @Override
     public BusDTO findById(Long id) {
         return new BusDTO(busRepository.findById(id)
+                          .orElseThrow(() -> new ObjectNotFoundException(
+                                                 "Object not Found", id)));
+    }
+
+    @Override
+    public BusSeatDTO findSeatsById(Long id) {
+        return new BusSeatDTO(busRepository.findById(id)
                           .orElseThrow(() -> new ObjectNotFoundException(
                                                  "Object not Found", id)));
     }

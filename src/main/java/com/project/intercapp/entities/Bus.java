@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,7 +23,7 @@ public class Bus {
     private String plate;
     private Integer capacity;
 
-    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Seat> seats;
 
     public Bus() {

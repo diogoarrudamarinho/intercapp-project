@@ -1,5 +1,6 @@
 package com.project.intercapp.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -8,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,8 +26,8 @@ public class Seat {
     @JoinColumn(name = "bus_id")
     private Bus bus;
 
-    @OneToOne(mappedBy = "seat")
-    private Reservation reservation;
+    @OneToMany(mappedBy = "seat")
+    private List<Reservation> reservation;
 
     public Seat() {
     }
@@ -61,11 +62,11 @@ public class Seat {
         this.bus = bus;
     }
 
-    public Reservation getReservation() {
+    public List<Reservation> getReservation() {
         return reservation;
     }
 
-    public void setReservation(Reservation reservation) {
+    public void setReservation(List<Reservation> reservation) {
         this.reservation = reservation;
     }
 
