@@ -38,7 +38,7 @@ public class Schedule {
     public Schedule() {
     }
 
-    public Schedule(Long id, LocalDateTime departureTime, LocalDateTime arrivalTime, String route, Bus bus) {
+    public Schedule(Long id, LocalDateTime departureTime, LocalDateTime arrivalTime, String route, Bus bus, Map<String, LocalDateTime> estimatedTimes) {
         this.id = id;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;

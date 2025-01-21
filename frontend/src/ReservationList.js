@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Container, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import AppNavbar from './AppNavbar';
-import './styles.css'; // Import the new styles.css
+import './styles.css'; 
 
 class ReservationList extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class ReservationList extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('/reservations/student/1'); // Replace with dynamic student ID
+    const response = await fetch('/reservations/student/1'); 
     if (response.ok) {
       const body = await response.json();
       this.setState({ reservations: body, isLoading: false });
@@ -21,7 +21,7 @@ class ReservationList extends Component {
   }
 
   async cancel(id) {
-    await fetch(`/reservations/${id}`, {
+    await fetch(`/reservations/reservations/${id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
