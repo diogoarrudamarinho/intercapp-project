@@ -1,0 +1,243 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    text-align: center;
+  }
+  
+  a {
+    color: #007ACC;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Navbar Styles */
+  .navbar {
+    background-color: #007ACC;
+    padding: 10px 20px;
+  }
+  
+  .navbar-brand, .nav-link {
+    color: #FFFFFF !important;
+  }
+  
+  .nav-link:hover {
+    color: #AED6F1 !important;
+  }
+  
+  /* Hero Section Styles */
+  .hero {
+    background-color: #007ACC;
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+  }
+  
+  .hero .display-3 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .hero .lead {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero hr {
+    border-top: 1px solid #ffffff;
+    width: 50%;
+    margin: 20px auto;
+  }
+  
+  /* Container Styles */
+  .container {
+    padding: 20px;
+  }
+  
+  /* Card Styles */
+  .card {
+    background-color: #ffffff;
+    color: #333;
+    margin: 16px auto;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-control {
+    background-color: #f4f4f9;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .form-control:focus {
+    background-color: #ffffff;
+    color: #333;
+    border-color: #007ACC;
+  }
+  
+  .btn-primary {
+    background-color: #007ACC;
+    border-color: #007ACC;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #005F99;
+    border-color: #005F99;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+  
+  /* Table Styles */
+  .table {
+    background-color: #ffffff;
+    color: #333;
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f4f4f9;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Button Styles */
+  .btn-link {
+    color: #007ACC;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .btn-link:hover {
+    color: #005F99;
+  }
+  
+  /* Specific Component Styles */
+  .horario {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007ACC;
+  }
+  
+  .rota {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .dias {
+    font-size: 14px;
+    color: #555;
+    margin-top: 4px;
+  }
+  
+  .detalhes {
+    font-size: 14px;
+    color: #777;
+    margin-top: 4px;
+  }
+  
+  #detalhesRota {
+    padding: 16px;
+    color: #333;
+    text-align: center;
+  }
+  
+  #detalhesRota h2 {
+    color: #007ACC;
+  }
+  
+  #detalhesRota ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #detalhesRota ul li {
+    background: #ffffff;
+    margin: 8px 0;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .botaoContainer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .botao {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #007ACC;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  .botao:hover {
+    background-color: #005F99;
+    transform: scale(1.05);
+  }
+  
+  .botao.reservado {
+    background-color: #28A745;
+  }
+  
+  .botao.reservado:hover {
+    background-color: #218838;
+  }

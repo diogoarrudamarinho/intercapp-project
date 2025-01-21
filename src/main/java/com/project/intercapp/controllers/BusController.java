@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.intercapp.dto.BusDTO;
 import com.project.intercapp.dto.BusMinDTO;
+import com.project.intercapp.dto.BusSeatDTO;
 import com.project.intercapp.entities.Bus;
-import com.project.intercapp.entities.Seat;
 import com.project.intercapp.service.BusService;
-import com.project.intercapp.service.SeatService;
 
 @RestController
 @RequestMapping("/buses")
@@ -26,9 +25,6 @@ public class BusController {
 
     @Autowired
     private BusService busService;
-
-    @Autowired
-    private SeatService seatService;
 
     @PostMapping
     public ResponseEntity<BusDTO> create(@RequestBody Bus newBus) {
@@ -46,8 +42,7 @@ public class BusController {
     }
 
     @GetMapping("/{id}/seats")
-    public ResponseEntity<List<Seat>> findSeatsByBus(@PathVariable Long id) {
-        return ResponseEntity.ok(seatService.findByBusId(id));
+    public ResponseEntity<BusSeatDTO> findSeatsByBus(@PathVariable Long id) {
+        return ResponseEntity.ok(busService.findSeatsById(id));
     }
-
 }

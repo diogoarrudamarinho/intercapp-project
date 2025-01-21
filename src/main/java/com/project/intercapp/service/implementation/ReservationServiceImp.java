@@ -1,5 +1,6 @@
 package com.project.intercapp.service.implementation;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.ObjectNotFoundException;
@@ -45,9 +46,10 @@ public class ReservationServiceImp implements ReservationService{
         if (hasActiveReservation(student.getId(), seat.getBus().getId())) {
             throw new IllegalArgumentException("Student already has an active reservation for this bus");
         }
-
+        
         Reservation reservation = new Reservation(null, seat, student);
         reservation.setStatus(true);
+        reservation.setReservationDate(LocalDateTime.now());
         
         return new ReservationDTO(reservationRepository.save(reservation));
     }

@@ -1,7 +1,6 @@
 package com.project.intercapp.entities;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,7 +22,7 @@ public class Reservation {
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "seat_id", nullable = false)
     private Seat seat;
 
@@ -85,32 +83,29 @@ public class Reservation {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.student);
-        hash = 67 * hash + Objects.hashCode(this.seat);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        }
-        if (obj == null) {
+        if (obj == null)
             return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
             return false;
-        }
-        final Reservation other = (Reservation) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        Reservation other = (Reservation) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
             return false;
-        }
-        if (!Objects.equals(this.student, other.student)) {
-            return false;
-        }
-        return Objects.equals(this.seat, other.seat);
+        return true;
     }
+
+    
 
 }

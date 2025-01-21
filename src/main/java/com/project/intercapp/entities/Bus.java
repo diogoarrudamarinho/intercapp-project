@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,10 +23,10 @@ public class Bus {
     private String plate;
     private Integer capacity;
 
-    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Seat> seats;
 
-    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Schedule> schedules;
 
     public Bus() {
@@ -78,14 +79,6 @@ public class Bus {
         this.seats = seats;
     }
 
-    public List<Schedule> getSchedules() {
-        return schedules;
-    }
-    
-    public void setSchedules(List<Schedule> schedules) {
-        this.schedules = schedules;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -115,6 +108,14 @@ public class Bus {
         } else if (!plate.equals(other.plate))
             return false;
         return true;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
 }

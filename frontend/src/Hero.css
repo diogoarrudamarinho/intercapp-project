@@ -1,0 +1,22 @@
+.hero {
+    background-color: #007ACC;
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+  }
+  
+  .hero .display-3 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .hero .lead {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero hr {
+    border-top: 1px solid #ffffff;
+    width: 50%;
+    margin: 20px auto;
+  }

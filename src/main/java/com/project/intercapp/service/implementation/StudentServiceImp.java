@@ -13,7 +13,7 @@ import com.project.intercapp.repositories.StudentRepository;
 import com.project.intercapp.service.StudentService;
 
 @Service
-public class StudentServiceImp implements StudentService{
+public class StudentServiceImp implements StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
@@ -27,51 +27,41 @@ public class StudentServiceImp implements StudentService{
     @Override
     @Transactional
     public StudentDTO create(Student newStudent) {
-        if (newStudent.getId() != null && studentRepository.existsById(newStudent.getId()))
+        if (newStudent.getId() != null && studentRepository.existsById(newStudent.getId())) {
             throw new IllegalArgumentException("User ID already exists");
-
+        }
         return new StudentDTO(studentRepository.save(newStudent));
     }
 
     @Override
     @Transactional
     public boolean delete(String register) {
-
         Student student = studentRepository.findByRegister(register)
-        .orElseThrow(() -> new IllegalArgumentException(
-                               "Object " + register + " not Found"));
-
+                .orElseThrow(() -> new IllegalArgumentException("Object " + register + " not Found"));
         studentRepository.delete(student);
         return true;
     }
 
-
     @Override
     public StudentDTO findById(Long id) {
-        return new StudentDTO( studentRepository.findById(id)
-                            .orElseThrow(() -> new ObjectNotFoundException(
-                                                "Object not Found", id))); 
+        return new StudentDTO(studentRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Object not Found", id)));
     }
 
     @Override
     @Transactional
     public StudentDTO update(Long id, Student newStudent) {
-
         Student student = studentRepository.findById(id).get();
-
         student.setName(newStudent.getName());
         student.setMail(newStudent.getMail());
         student.setPhones(newStudent.getPhones());
         student.setRegister(newStudent.getRegister());
-
-        return new StudentDTO(studentRepository.save(student)); 
+        return new StudentDTO(studentRepository.save(student));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<StudentDTO> findAll() {
-        return studentRepository.findAll()
-                .stream().map(StudentDTO::new)
-                .toList();
-    }  
+        return studentRepository.findAll().stream().map(StudentDTO::new).toList();
+    }
 }

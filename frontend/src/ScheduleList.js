@@ -1,84 +1,52 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Container } from 'reactstrap';
 import AppNavbar from './AppNavbar';
+import './styles.css'; // Import the new styles.css
 
 class ScheduleList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {schedules: [], isLoading: true};
-        this.remove = this.remove.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = { schedules: [], isLoading: true };
+  }
+
+  async componentDidMount() {
+    const response = await fetch('/schedules');
+    if (response.ok) {
+      const body = await response.json();
+      this.setState({ schedules: body, isLoading: false });
+    } else {
+      console.error('Failed to fetch schedules:', response.statusText);
+    }
+  }
+
+  render() {
+    const { schedules, isLoading } = this.state;
+
+    if (isLoading) {
+      return <p>Loading...</p>;
     }
 
-    async componentDidMount() {
-        const response = await fetch('/schedules');
-        if (response.ok) {
-            const body = await response.json();
-            this.setState({schedules: body, isLoading: false});
-        } else {
-            console.error('Failed to fetch schedules:', response.statusText);
-        }
-    }
+    const scheduleList = schedules.map(schedule => {
+      return <div key={schedule.id} className="card hoverable">
+        <div className="horario">{schedule.horario}</div>
+        <div className="rota">{schedule.rota}</div>
+        <div className="dias">{schedule.dias}</div>
+        <div className="detalhes">{schedule.detalhes}</div>
+      </div>
+    });
 
-    async remove(id) {
-        await fetch(`/schedules/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(() => {
-            let updatedSchedules = [...this.state.schedules].filter(i => i.id !== id);
-            this.setState({schedules: updatedSchedules});
-        });
-    }
-
-    render() {
-        const {schedules, isLoading} = this.state;
-
-        if (isLoading) {
-            return <p>Loading...</p>;
-        }
-
-        const scheduleList = schedules.map(schedule => {
-            return <tr key={schedule.id}>
-                <td style={{whiteSpace: 'nowrap'}}>{schedule.route}</td>
-                <td>{schedule.departureTime}</td>
-                <td>{schedule.arrivalTime}</td>
-                <td>
-                    <ButtonGroup>
-                        <Button size="sm" color="primary" tag={Link} to={"/schedules/" + schedule.id}>Edit</Button>
-                        <Button size="sm" color="danger" onClick={() => this.remove(schedule.id)}>Delete</Button>
-                    </ButtonGroup>
-                </td>
-            </tr>
-        });
-
-        return (
-            <div>
-                <AppNavbar/>
-                <Container fluid>
-                    <div className="float-right">
-                        <Button color="success" tag={Link} to="/schedules/new">Add Schedule</Button>
-                    </div>
-                    <h3>Schedules</h3>
-                    <Table className="mt-4">
-                        <thead>
-                        <tr>
-                            <th width="30%">Route</th>
-                            <th width="20%">Departure Time</th>
-                            <th width="20%">Arrival Time</th>
-                            <th width="30%">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {scheduleList}
-                        </tbody>
-                    </Table>
-                </Container>
-            </div>
-        );
-    }
+    return (
+      <div>
+        <AppNavbar />
+        <Container fluid>
+          <h3>Horários</h3>
+          <div id="horarios">
+            {scheduleList}
+          </div>
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default ScheduleList;

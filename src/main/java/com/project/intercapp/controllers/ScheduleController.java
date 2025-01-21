@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.intercapp.dto.ScheduleDTO;
+import com.project.intercapp.entities.Bus;
 import com.project.intercapp.entities.Schedule;
+import com.project.intercapp.service.BusService;
 import com.project.intercapp.service.ScheduleService;
 
 @RestController
@@ -25,9 +27,18 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
+    @Autowired
+    private BusService busService;
+
     @PostMapping
-    public ResponseEntity<ScheduleDTO> create(@RequestBody Schedule newSchedule) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.create(newSchedule));
+    public ResponseEntity<ScheduleDTO> create(@RequestBody ScheduleDTO newSchedule) {
+        Bus bus = busService.findEntityById(newSchedule.getBusId());
+        Schedule schedule = new Schedule();
+        schedule.setDepartureTime(newSchedule.getDepartureTime());
+        schedule.setArrivalTime(newSchedule.getArrivalTime());
+        schedule.setRoute(newSchedule.getRoute());
+        schedule.setBus(bus);
+        return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.create(schedule));
     }
 
     @PutMapping("/{id}")

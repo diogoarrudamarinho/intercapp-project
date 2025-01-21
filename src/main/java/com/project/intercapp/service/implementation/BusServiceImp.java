@@ -1,7 +1,6 @@
 package com.project.intercapp.service.implementation;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.intercapp.dto.BusDTO;
 import com.project.intercapp.dto.BusMinDTO;
+import com.project.intercapp.dto.BusSeatDTO;
 import com.project.intercapp.entities.Bus;
 import com.project.intercapp.entities.Seat;
 import com.project.intercapp.repositories.BusRepository;
@@ -56,6 +56,20 @@ public class BusServiceImp implements BusService {
         return new BusDTO(busRepository.findById(id)
                           .orElseThrow(() -> new ObjectNotFoundException(
                                                  "Object not Found", id)));
+    }
+
+    @Override
+    public BusSeatDTO findSeatsById(Long id) {
+        return new BusSeatDTO(busRepository.findById(id)
+                          .orElseThrow(() -> new ObjectNotFoundException(
+                                                 "Object not Found", id)));
+    }
+
+    @Override
+    public Bus findEntityById(Long id) {
+        return busRepository.findById(id)
+                          .orElseThrow(() -> new ObjectNotFoundException(
+                                                 "Object not Found", id));
     }
 
     @Override
@@ -107,7 +121,7 @@ public class BusServiceImp implements BusService {
     public List<BusDTO> findAll(){
         return busRepository.findAll()
                             .stream().map(BusDTO::new)
-                            .collect(Collectors.toList());                                             
+                            .toList();                                             
     }
 
     @Override
@@ -115,6 +129,6 @@ public class BusServiceImp implements BusService {
     public List<BusMinDTO> findAllMin(){
         return busRepository.findAll()
                             .stream().map(BusMinDTO::new)
-                            .collect(Collectors.toList());                                             
+                            .toList();                                             
     }
 }
