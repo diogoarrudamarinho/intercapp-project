@@ -9,4 +9,5 @@ import com.project.intercapp.entities.Student;
 public interface StudentRepository extends JpaRepository<Student, Long>{
    
     Optional<Student> findByRegister(String register);
+    Optional<Student> findByMail(String mail);
 }

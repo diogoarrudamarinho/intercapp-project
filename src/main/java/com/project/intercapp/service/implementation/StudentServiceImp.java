@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.intercapp.dto.StudentDTO;
+import com.project.intercapp.dto.StudentLoginDTO;
 import com.project.intercapp.entities.Student;
 import com.project.intercapp.repositories.StudentRepository;
 import com.project.intercapp.service.StudentService;
@@ -22,6 +23,12 @@ public class StudentServiceImp implements StudentService {
     public Student findEntityById(Long studentId) {
         return studentRepository.findById(studentId)
                 .orElseThrow(() -> new ObjectNotFoundException("Student not found", studentId));
+    }
+
+    @Override
+    public StudentLoginDTO findByMail(String studentMail) {
+        return new StudentLoginDTO (studentRepository.findByMail(studentMail)
+                .orElseThrow(() -> new IllegalArgumentException("Student not found" + studentMail)));
     }
 
     @Override

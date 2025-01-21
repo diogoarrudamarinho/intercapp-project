@@ -3,6 +3,7 @@ package com.project.intercapp.service;
 import java.util.List;
 
 import com.project.intercapp.dto.StudentDTO;
+import com.project.intercapp.dto.StudentLoginDTO;
 import com.project.intercapp.entities.Student;
 
 public interface StudentService {
@@ -13,5 +14,6 @@ public interface StudentService {
     StudentDTO update(Long id, Student student);
     List<StudentDTO> findAll();
     boolean delete(String register);
+    StudentLoginDTO findByMail(String mail);
 
 }

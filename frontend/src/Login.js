@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Container, Form, FormGroup, Input, Label, Alert } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
 class Login extends Component {
@@ -7,7 +7,8 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,17 +21,40 @@ class Login extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    // Implement login logic here
-    const { navigate } = this.props;
-    navigate('/home');
+    const { email, password } = this.state;
+
+    try {
+      const response = await fetch(`/students/${email}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.password === password) {
+          const { navigate } = this.props;
+          navigate('/home');
+        } else {
+          this.setState({ error: 'Invalid email or password' });
+        }
+      } else {
+        this.setState({ error: 'Invalid email or password' });
+      }
+    } catch (error) {
+      this.setState({ error: 'An error occurred. Please try again later.' });
+    }
   }
 
   render() {
     return (
       <Container>
         <h2>Login</h2>
+        {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label for="email">Email</Label>

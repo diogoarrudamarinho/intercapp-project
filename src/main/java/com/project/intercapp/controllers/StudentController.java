@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.project.intercapp.dto.StudentDTO;
+import com.project.intercapp.dto.StudentLoginDTO;
 import com.project.intercapp.entities.Student;
 import com.project.intercapp.service.StudentService;
 
@@ -37,9 +38,9 @@ public class StudentController {
         return ResponseEntity.created(location).body(studentCreated);    
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<StudentDTO> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(studentService.findById(id));
+    @GetMapping("/{mail}")
+    public ResponseEntity<StudentLoginDTO> findByMail(@PathVariable String mail) {
+        return ResponseEntity.ok(studentService.findByMail(mail));
     }
 
     @PutMapping("/{id}")
