@@ -35,6 +35,7 @@ public class ScheduleServiceImp implements ScheduleService {
         schedule.setArrivalTime(newSchedule.getArrivalTime());
         schedule.setRoute(newSchedule.getRoute());
         schedule.setBus(newSchedule.getBus());
+        schedule.setEstimatedTimes(newSchedule.getEstimatedTimes());
 
         return new ScheduleDTO(scheduleRepository.save(schedule));
     }

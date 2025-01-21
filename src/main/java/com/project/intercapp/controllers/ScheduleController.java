@@ -38,12 +38,21 @@ public class ScheduleController {
         schedule.setArrivalTime(newSchedule.getArrivalTime());
         schedule.setRoute(newSchedule.getRoute());
         schedule.setBus(bus);
+        schedule.setEstimatedTimes(newSchedule.getEstimatedTimes());
         return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.create(schedule));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ScheduleDTO> update(@PathVariable Long id, @RequestBody Schedule newSchedule) {
-        return ResponseEntity.ok(scheduleService.update(id, newSchedule));
+    public ResponseEntity<ScheduleDTO> update(@PathVariable Long id, @RequestBody ScheduleDTO newSchedule) {
+        Bus bus = busService.findEntityById(newSchedule.getBusId());
+        Schedule schedule = new Schedule();
+        schedule.setId(id);
+        schedule.setDepartureTime(newSchedule.getDepartureTime());
+        schedule.setArrivalTime(newSchedule.getArrivalTime());
+        schedule.setRoute(newSchedule.getRoute());
+        schedule.setBus(bus);
+        schedule.setEstimatedTimes(newSchedule.getEstimatedTimes());
+        return ResponseEntity.ok(scheduleService.update(id, schedule));
     }
 
     @GetMapping

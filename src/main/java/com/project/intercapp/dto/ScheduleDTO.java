@@ -1,6 +1,7 @@
 package com.project.intercapp.dto;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import com.project.intercapp.entities.Schedule;
 
@@ -11,6 +12,7 @@ public class ScheduleDTO {
     private LocalDateTime arrivalTime;
     private String route;
     private Long busId;
+    private Map<String, LocalDateTime> estimatedTimes;
 
     public ScheduleDTO() {
     }
@@ -21,6 +23,7 @@ public class ScheduleDTO {
         this.arrivalTime = entity.getArrivalTime();
         this.route = entity.getRoute();
         this.busId = entity.getBus().getId();
+        this.estimatedTimes = entity.getEstimatedTimes();
     }
 
     public Long getId() {
@@ -61,5 +64,13 @@ public class ScheduleDTO {
 
     public void setBusId(Long busId) {
         this.busId = busId;
+    }
+
+    public Map<String, LocalDateTime> getEstimatedTimes() {
+        return estimatedTimes;
+    }
+
+    public void setEstimatedTimes(Map<String, LocalDateTime> estimatedTimes) {
+        this.estimatedTimes = estimatedTimes;
     }
 }

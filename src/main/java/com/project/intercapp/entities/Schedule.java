@@ -1,13 +1,18 @@
 package com.project.intercapp.entities;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapKeyColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +31,10 @@ public class Schedule {
     @JoinColumn(name = "bus_id", nullable = false)
     private Bus bus;
 
+    @ElementCollection(fetch=FetchType.EAGER)
+    @MapKeyColumn(name = "point")
+    private Map<String, LocalDateTime> estimatedTimes = new HashMap<>();
+
     public Schedule() {
     }
 
@@ -35,6 +44,7 @@ public class Schedule {
         this.arrivalTime = arrivalTime;
         this.route = route;
         this.bus = bus;
+        this.estimatedTimes = estimatedTimes;
     }
 
     public Long getId() {
@@ -75,6 +85,14 @@ public class Schedule {
 
     public void setBus(Bus bus) {
         this.bus = bus;
+    }
+
+    public Map<String, LocalDateTime> getEstimatedTimes() {
+        return estimatedTimes;
+    }
+
+    public void setEstimatedTimes(Map<String, LocalDateTime> estimatedTimes) {
+        this.estimatedTimes = estimatedTimes;
     }
 
     @Override

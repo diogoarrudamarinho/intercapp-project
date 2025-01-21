@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, Form, FormGroup, Input, Label, Alert } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from './AuthContext';
 
 class Login extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class Login extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const { email, password } = this.state;
+    const { login } = this.context;
 
     try {
       const response = await fetch(`/students/${email}`, {
@@ -37,16 +39,17 @@ class Login extends Component {
       if (response.ok) {
         const data = await response.json();
         if (data.password === password) {
+          login('token-teste');
           const { navigate } = this.props;
           navigate('/home');
         } else {
-          this.setState({ error: 'Invalid email or password' });
+          this.setState({ error: 'Email ou senha inválidos' });
         }
       } else {
-        this.setState({ error: 'Invalid email or password' });
+        this.setState({ error: 'Email ou senha inválidos' });
       }
     } catch (error) {
-      this.setState({ error: 'An error occurred. Please try again later.' });
+      this.setState({ error: 'Ocorreu um erro. Tente novamente mais tarde.' });
     }
   }
 
@@ -61,18 +64,20 @@ class Login extends Component {
             <Input type="email" name="email" id="email" value={this.state.email} onChange={this.handleChange} />
           </FormGroup>
           <FormGroup>
-            <Label for="password">Password</Label>
+            <Label for="password">Senha</Label>
             <Input type="password" name="password" id="password" value={this.state.password} onChange={this.handleChange} />
           </FormGroup>
           <FormGroup>
             <Button color="primary" type="submit">Login</Button>{' '}
-            <Button color="secondary" tag={Link} to="/register">Register</Button>
+            <Button color="secondary" tag={Link} to="/register">Registrar</Button>
           </FormGroup>
         </Form>
       </Container>
     );
   }
 }
+
+Login.contextType = AuthContext;
 
 export default function LoginWithRouter(props) {
   const navigate = useNavigate();

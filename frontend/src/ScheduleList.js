@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Container } from 'reactstrap';
+import { Container, Modal, ModalHeader, ModalBody, Button } from 'reactstrap';
 import AppNavbar from './AppNavbar';
-import './styles.css'; // Import the new styles.css
+import './styles.css';
 
 class ScheduleList extends Component {
   constructor(props) {
     super(props);
-    this.state = { schedules: [], isLoading: true };
+    this.state = { schedules: [], isLoading: true, modal: false, selectedSchedule: null };
+    this.toggle = this.toggle.bind(this);
   }
 
   async componentDidMount() {
@@ -19,19 +20,24 @@ class ScheduleList extends Component {
     }
   }
 
+  toggle(schedule) {
+    this.setState({
+      modal: !this.state.modal,
+      selectedSchedule: schedule
+    });
+  }
+
   render() {
-    const { schedules, isLoading } = this.state;
+    const { schedules, isLoading, modal, selectedSchedule } = this.state;
 
     if (isLoading) {
       return <p>Loading...</p>;
     }
 
     const scheduleList = schedules.map(schedule => {
-      return <div key={schedule.id} className="card hoverable">
-        <div className="horario">{schedule.horario}</div>
-        <div className="rota">{schedule.rota}</div>
-        <div className="dias">{schedule.dias}</div>
-        <div className="detalhes">{schedule.detalhes}</div>
+      return <div key={schedule.id} className="card hoverable" onClick={() => this.toggle(schedule)}>
+        <div className="rota">{schedule.route}</div>
+        <div className="horario">{schedule.departureTime} - {schedule.arrivalTime}</div>
       </div>
     });
 
@@ -44,6 +50,23 @@ class ScheduleList extends Component {
             {scheduleList}
           </div>
         </Container>
+        {selectedSchedule && (
+          <Modal isOpen={modal} toggle={this.toggle}>
+            <ModalHeader toggle={this.toggle}>Schedule Details</ModalHeader>
+            <ModalBody>
+              <p><strong>Route:</strong> {selectedSchedule.route}</p>
+              <p><strong>Departure Time:</strong> {selectedSchedule.departureTime}</p>
+              <p><strong>Arrival Time:</strong> {selectedSchedule.arrivalTime}</p>
+              <p><strong>Bus:</strong> {selectedSchedule.bus.model} ({selectedSchedule.bus.plate})</p>
+              <p><strong>Estimated Times:</strong></p>
+              <ul>
+                {Object.entries(selectedSchedule.estimatedTimes).map(([point, time]) => (
+                  <li key={point}>{point} - {time}</li>
+                ))}
+              </ul>
+            </ModalBody>
+          </Modal>
+        )}
       </div>
     );
   }
